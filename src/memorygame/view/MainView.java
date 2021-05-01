@@ -1,6 +1,9 @@
 package memorygame.view;
 
-import java.awt.Container;
+import memorygame.model.ShowScore;
+import memorygame.model.User;
+
+import java.awt.*;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,8 +22,18 @@ public class MainView {
         this.mainframe.setLocationRelativeTo(null);
         this.mainContentPane = this.mainframe.getContentPane();
         this.mainContentPane.setLayout(new BoxLayout(this.mainContentPane, BoxLayout.PAGE_AXIS));
+
+        // teste do contador de cartas
+        // this.mainframe.add(new ShowScore());
+        // this.mainframe.pack();
+        // this.mainframe.setVisible(true);
+
+
+
+
+
     }
-    
+
     public void newGame(){
         this.mainframe.setVisible(true);
     }

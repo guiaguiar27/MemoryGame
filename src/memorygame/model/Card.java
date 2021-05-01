@@ -74,7 +74,7 @@ public class Card extends JLabel implements MouseListener {
     public void mouseExited(MouseEvent me) {
         this.mousePressOnMe = false;
     }
-    
+
     private void turnUp() {
         if (this.faceUp) return;
         if (this.faceUp) {
@@ -90,4 +90,5 @@ public class Card extends JLabel implements MouseListener {
         }
         
     }
+
 }

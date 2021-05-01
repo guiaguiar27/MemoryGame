@@ -1,4 +1,4 @@
-package Model;
+package memorygame.model;
 
 public class Machine {
 }

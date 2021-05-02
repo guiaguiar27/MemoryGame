@@ -11,11 +11,19 @@ public class User {
     }
 
     public void setScore(int score) {
-        this.Score += score;
+        this.Score = score;
     }
-    private void AddPairCars(Card C1, Card C2){
+    private int GetSize(){
+        return FindedCards.size();
+    }
+    public void AddPairCards(Card C1, Card C2){
+        int score;
         FindedCards.add(C1);
         FindedCards.add(C2);
+        score = GetSize()/2;
+        setScore(score);
+
+
     }
     public boolean win(){
         if(FindedCards.size() == 8) return true;

@@ -6,14 +6,9 @@ import java.awt.MediaTracker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import memorygame.Controller.GameController;
 import memorygame.model.Card;
 
 public class MainView implements ActionListener {
@@ -22,6 +17,7 @@ public class MainView implements ActionListener {
     private final Container mainContentPane;
     private final ImageIcon cardIcon[]; //0-7 faces, 8 trás
     private final String ImageDirectory = "default";
+
 
     public MainView() {
 
@@ -87,11 +83,12 @@ public class MainView implements ActionListener {
 
         // define a face de trás
         ImageIcon backIcon = this.cardIcon[8];
-
+        GameController controller = new GameController();
         int cardsToAdd[] = new int[8];
         for (int i = 0; i < 4; i++) {
             cardsToAdd[2 * i] = i;
             cardsToAdd[2 * i + 1] = i;
+
         }
 
         randomizeIntArray(cardsToAdd);
@@ -100,9 +97,10 @@ public class MainView implements ActionListener {
 
             int num = cardsToAdd[i];
 
-            Card newCard = new Card(this.cardIcon[num], backIcon, num);
+            Card newCard = new Card(controller,this.cardIcon[num], backIcon, num);
 
             panel.add(newCard);
+
         }
 
         return panel;
@@ -122,7 +120,9 @@ public class MainView implements ActionListener {
         this.mainContentPane.add(makeCards());
 
         this.mainframe.setVisible(true);
+
     }
+
 
     @Override
     public void actionPerformed(ActionEvent ae) {

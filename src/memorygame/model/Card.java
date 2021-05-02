@@ -1,10 +1,13 @@
 package memorygame.model;
 
+import memorygame.Controller.GameController;
+
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Card extends JLabel implements MouseListener {
 
+    private final GameController controller;
     Icon faceIcon;
     Icon backIcon;
     boolean faceUp = false;
@@ -12,7 +15,8 @@ public class Card extends JLabel implements MouseListener {
     int iconWidthHalf, iconHeightHalf;
     boolean mousePressedOnMe = false;
 
-    public Card(Icon face, Icon back, int num) {
+
+    public Card(GameController Controller,  Icon face, Icon back, int num) {
         // inicialmente mostrar a face para baixo
         super(back);
         this.faceIcon = face;
@@ -23,6 +27,8 @@ public class Card extends JLabel implements MouseListener {
       
         this.iconWidthHalf = back.getIconWidth() / 2;
         this.iconHeightHalf = back.getIconHeight() / 2;
+
+        this.controller = Controller;
     }
 
     public void turnUp() {
@@ -31,7 +37,7 @@ public class Card extends JLabel implements MouseListener {
         }
 
         this.faceUp = true;
-
+        this.faceUp = this.controller.TurnUp(this);
         if (this.faceUp) {
             this.setIcon(this.faceIcon);
         }

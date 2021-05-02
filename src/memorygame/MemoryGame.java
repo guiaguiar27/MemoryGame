@@ -1,6 +1,6 @@
 package memorygame;
 
-import memorygame.view.MainView;
+import memorygame.view.Options;
 
 /**
  * @author Guilherme Aguiar(3496) && Luciano Belo (3897) 
@@ -8,9 +8,9 @@ import memorygame.view.MainView;
 
 public class MemoryGame {
 
-
     public static void main(String[] args) {
-        MainView tela = new MainView();
-        tela.newGame();
+        Options options = new Options();
+        options.setVisible(true);
+      
     }   
 }

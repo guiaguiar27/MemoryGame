@@ -2,7 +2,6 @@ package memorygame.Controller;
 import memorygame.model.Card;
 import memorygame.model.User;
 
-import java.awt.desktop.OpenFilesHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -10,20 +9,18 @@ import javax.swing.Timer;
 
 public class GameController implements ActionListener {
     private Vector turnedCards;
-    User Player;
 
+    User Player1 = new User();
+    User Player2 = new User();
 
     private int MaxSize;
-    private int CountToFinal;
     private Timer timeToTurnDown;
     private final int TurnDownDelay = 2000;
 
-
     public GameController() {
-        this.Player = new User();
+
         this.turnedCards = new Vector(2);
         this.MaxSize = 2; // apenas 2 cartas
-        this.CountToFinal = 1;
         this.timeToTurnDown = new Timer(TurnDownDelay, this);
         this.timeToTurnDown.setRepeats(false);
     }
@@ -38,7 +35,6 @@ public class GameController implements ActionListener {
 
 
     }
-// implementado para um jogar
 
     private boolean AddCards(Card c) {
         this.turnedCards.add(c);
@@ -46,15 +42,8 @@ public class GameController implements ActionListener {
         if (getSize() == this.MaxSize) {
             Card OtherCardInPair = (Card) this.turnedCards.get(0);
             if (OtherCardInPair.getNum() == c.getNum()) {
-                this.CountToFinal++;
-
-                Player.AddPairCards(c,OtherCardInPair);
-                System.out.println("Score: "+Player.getScore());
-
-                if(Player.win()) {
-                    System.out.println("Ganhou");
-                }
-
+                System.out.println("Entrou aqui");
+                Player1.setScore(1);
                 this.turnedCards.clear();
 
             }
@@ -73,11 +62,4 @@ public class GameController implements ActionListener {
         this.turnedCards.clear();
     }
 
-    public int getCountToFinal() {
-        return CountToFinal;
-    }
-
-    public void setCountToFinal(int countToFinal) {
-        CountToFinal = countToFinal;
-    }
 }

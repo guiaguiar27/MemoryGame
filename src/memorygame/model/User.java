@@ -11,7 +11,7 @@ public class User {
     }
 
     public void setScore(int score) {
-        Score = score;
+        this.Score += score;
     }
     private void AddPairCars(Card C1, Card C2){
         FindedCards.add(C1);

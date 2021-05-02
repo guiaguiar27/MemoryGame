@@ -92,7 +92,6 @@ public class MainView implements ActionListener {
         }
 
         randomizeIntArray(cardsToAdd);
-
         for (int i = 0; i < cardsToAdd.length; i++) {
 
             int num = cardsToAdd[i];

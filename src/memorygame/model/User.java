@@ -1,9 +1,7 @@
 package memorygame.model;
 import java.util.ArrayList;
 
-public class User  extends {
-    JLabel label;
-    int count_temp;
+public class User {
     private int Score;
     ArrayList<Card> FindedCards = new ArrayList<Card>();
     public int getScore() {

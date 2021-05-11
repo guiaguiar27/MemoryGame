@@ -1,13 +1,14 @@
 package memorygame.model;
 
-import memorygame.Controller.GameController;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import memorygame.Controller.CardControllerMachine;
 
-import java.awt.event.*;
-import javax.swing.*;
+public class CardSecond extends JLabel implements MouseListener {
 
-public class Card extends JLabel implements MouseListener {
-
-    private final GameController controller;
+    private final CardControllerMachine controller;
     Icon faceIcon;
     Icon backIcon;
     boolean faceUp = false;
@@ -15,7 +16,7 @@ public class Card extends JLabel implements MouseListener {
     int iconWidthHalf, iconHeightHalf;
     boolean mousePressedOnMe = false;
 
-    public Card(GameController Controller, Icon face, Icon back, int num) {
+    public CardSecond(CardControllerMachine Controller, Icon face, Icon back, int num) {
         // inicialmente mostrar a face para baixo
         super(back);
         this.faceIcon = face;
@@ -30,13 +31,16 @@ public class Card extends JLabel implements MouseListener {
         this.controller = Controller;
     }
 
-    public void turnUp() {
+    public void turnUp(boolean Machine) {
         if (this.faceUp) {
             return;
         }
 
-        this.faceUp = true;
-        this.faceUp = this.controller.TurnUp(this);
+        if (Machine == true) {
+            this.faceUp = true;
+        } else {
+            this.faceUp = this.controller.TurnUp(this);
+        }
         if (this.faceUp) {
             this.setIcon(this.faceIcon);
         }
@@ -87,7 +91,7 @@ public class Card extends JLabel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         // over icon, so try to turn up the card
         if (overIcon(e.getX(), e.getY())) {
-            this.turnUp();
+            this.turnUp(false);
         }
     }
 
@@ -139,4 +143,5 @@ public class Card extends JLabel implements MouseListener {
         // forget any previous mouse press
         this.mousePressedOnMe = false;
     }
+
 }

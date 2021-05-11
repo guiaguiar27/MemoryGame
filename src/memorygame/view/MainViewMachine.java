@@ -8,21 +8,37 @@ import java.awt.MediaTracker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import memorygame.Controller.CardControllerMachine;
+import memorygame.Controller.GameControllerMachine;
+import memorygame.model.CardSecond;
+import memorygame.model.Machine;
+import memorygame.model.UserMachine;
 
-import memorygame.Controller.GameController;
-import memorygame.model.Card;
 
-public class MainView implements ActionListener {
+public class MainViewMachine implements ActionListener {
 
     private final JFrame mainframe;
     private final Container mainContentPane;
     private final ImageIcon cardIcon[]; //0-7 faces, 8 trás
+    private final String ImageDirectory = "default";
+    private UserMachine Player;
+    private Machine Jarvis;
+    
+    public MainViewMachine() {
 
-    public MainView() {
-
-        this.mainframe = new JFrame("Jogo da Memória - Single Player");
+        this.mainframe = new JFrame("Jogo da Memória - Player Vs Computador");
         this.mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainframe.setSize(800, 900);
         this.mainframe.setLocationRelativeTo(null);
@@ -37,6 +53,7 @@ public class MainView implements ActionListener {
 
         newMenuItem("Novo Jogo", gameMenu, this);
         newMenuItem("Sair", gameMenu, this);
+        newMenuItem("Placar", gameMenu, this);
 
         JMenu aboutMenu = new JMenu("Sobre");
         menuBar.add(aboutMenu);
@@ -77,12 +94,14 @@ public class MainView implements ActionListener {
     }
 
     public JPanel makeCards() {
-
+        this.Jarvis = new Machine();
+        this.Player = new UserMachine();
         JPanel panel = new JPanel(new GridLayout(4, 2));
-        GameController controller = new GameController();
+
         // define a face de trás
         ImageIcon backIcon = this.cardIcon[8];
-
+        GameControllerMachine Gcontroller = new GameControllerMachine(Jarvis);
+        CardControllerMachine controller = new CardControllerMachine(Gcontroller, Player);
         int cardsToAdd[] = new int[8];
         for (int i = 0; i < 4; i++) {
             cardsToAdd[2 * i] = i;
@@ -95,11 +114,13 @@ public class MainView implements ActionListener {
 
             int num = cardsToAdd[i];
 
-            Card newCard = new Card(controller, this.cardIcon[num], backIcon, num);
+            CardSecond newCard = new CardSecond(controller, this.cardIcon[num], backIcon, num);
 
+            Gcontroller.pass_to_machine(newCard);
             panel.add(newCard);
 
         }
+
         return panel;
     }
 
@@ -145,6 +166,7 @@ public class MainView implements ActionListener {
 
     public void newGame() {
         this.mainContentPane.removeAll();
+
         this.mainContentPane.add(makeCards());
 
         this.mainframe.setVisible(true);
@@ -167,8 +189,23 @@ public class MainView implements ActionListener {
         if (ae.getActionCommand().equals("Sair")) {
             System.exit(0);
         }
+
         if (ae.getActionCommand().equals("Como Jogar")) {
             aboutGame();
+        }
+        if (ae.getActionCommand().equals("Placar")) {
+            if(Player.win() == 1) {
+                JOptionPane.showMessageDialog(null, "Parabéns Você Ganhou");
+            }
+            else if(Player.win() == 2) {
+                JOptionPane.showMessageDialog(null, "Empatou");
+            }
+            else if(Jarvis.verify_win_machine() == true) {
+                JOptionPane.showMessageDialog(null, "Jarvis Ganhou");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Sem ganhador - Jogo em processo!");
+            }
         }
     }
 }

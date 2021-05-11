@@ -1,11 +1,14 @@
 package memorygame.model;
+
 import java.util.ArrayList;
 
-public class User {
+public class UserMachine {
+
     private int Score;
     private String Name;
     private String Type; // machine ~ person
-    ArrayList<Card> FindedCards = new ArrayList<>();
+    ArrayList<CardSecond> FindedCards = new ArrayList<>();
+
     public int getScore() {
         return Score;
     }
@@ -13,22 +16,29 @@ public class User {
     public void setScore(int score) {
         this.Score = score;
     }
-    private int GetSize(){
+
+    private int GetSize() {
         return FindedCards.size();
     }
-    public void AddPairCards(Card C1, Card C2){
+
+    public void AddPairCards(CardSecond C1, CardSecond C2) {
         int score;
         FindedCards.add(C1);
         FindedCards.add(C2);
-        score = GetSize()/2;
+        score = GetSize() / 2;
         setScore(score);
 
-
     }
-    public boolean win(){
 
-        //if(FindedCards.size() >=  6) return true; multiplayer
-        return FindedCards.size() == 8; // singleplayer
+    public int win() {
+
+        if (FindedCards.size() >= 6) {
+            return 1;
+        } else if (FindedCards.size() == 4) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
     public String getName() {
@@ -46,6 +56,4 @@ public class User {
     public void setType(String type) {
         Type = type;
     }
-    
-    
 }

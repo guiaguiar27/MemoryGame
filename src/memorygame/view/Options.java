@@ -1,18 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package memorygame.view;
 
-import java.awt.Color;
-import javax.swing.JOptionPane;
-import javax.swing.border.Border;
+import javax.swing.UIManager;
 
-/**
- *
- * @author luciano
- */
 public class Options extends javax.swing.JFrame {
 
     /**
@@ -39,19 +28,21 @@ public class Options extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("fs.png")));
-
-        jButton1.setBackground(Color.lightGray);
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/view/fs.png"))); // NOI18N
+        jButton1.setBackground(new java.awt.Color(192, 192, 192));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/assets/fs.png"))); // NOI18N
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setOpaque(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/view/third.png"))); // NOI18N
-        jButton3.setBackground(Color.lightGray);
+        jButton3.setBackground(new java.awt.Color(192, 192, 192));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/assets/third.png"))); // NOI18N
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -61,7 +52,8 @@ public class Options extends javax.swing.JFrame {
         jButton2.setOpaque(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setBorderPainted(false);
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/view/titulo.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memorygame/assets/titulo.png"))); // NOI18N
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,6 +84,7 @@ public class Options extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -103,7 +96,9 @@ public class Options extends javax.swing.JFrame {
 
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JOptionPane.showMessageDialog(null, "Esta Opção ainda não está Disponível!");
+        this.dispose();
+        MainViewMachine tela = new MainViewMachine();
+        tela.newGame();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -115,6 +110,11 @@ public class Options extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -131,8 +131,8 @@ public class Options extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Options.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
+        //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
